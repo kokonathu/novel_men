@@ -1,0 +1,174 @@
+NO          
+name        
+class_s     
+star        
+hougu_name_1
+hougu_name_2
+hougu_syurui
+hougu_color 
+hougu_lv    
+shincho     
+taiju       
+source      
+country     
+zokusei_1   
+zokusei_2   
+sex         
+st1         
+st2         
+st3         
+st4         
+st5         
+st6         
+day         
+skill_1     
+skill_2     
+skill_3     
+seihai      
+url         
+me          
+you         
+he_she      
+master      
+
+
+s1_2_name_1 
+s1_2_num_1  
+s1_2_name_2 
+s1_2_num_2  
+s1_2_name_3 
+s1_2_num_3  
+s2_3_name_1 
+s2_3_num_1  
+s2_3_name_2 
+s2_3_num_2  
+s2_3_name_3 
+s2_3_num_3  
+s3_4_name_1 
+s3_4_num_1  
+s3_4_name_2 
+s3_4_num_2  
+s3_4_name_3 
+s3_4_num_3  
+s4_5_name_1 
+s4_5_num_1  
+s4_5_name_2 
+s4_5_num_2  
+s4_5_name_3 
+s4_5_num_3  
+s5_6_name_1 
+s5_6_num_1  
+s5_6_name_2 
+s5_6_num_2  
+s5_6_name_3 
+s5_6_num_3  
+s6_7_name_1 
+s6_7_num_1  
+s6_7_name_2 
+s6_7_num_2  
+s6_7_name_3 
+s6_7_num_3  
+s7_8_name_1 
+s7_8_num_1  
+s7_8_name_2 
+s7_8_num_2  
+s7_8_name_3 
+s7_8_num_3  
+s8_9_name_1 
+s8_9_num_1  
+s8_9_name_2 
+s8_9_num_2  
+s8_9_name_3 
+s8_9_num_3  
+
+
+s1_2_name_1
+s1_2_name_2
+s1_2_name_3
+s2_3_name_1
+s2_3_name_2
+s2_3_name_3
+s3_4_name_1
+s3_4_name_2
+s3_4_name_3
+s4_5_name_1
+s4_5_name_2
+s4_5_name_3
+s5_6_name_1
+s5_6_name_2
+s5_6_name_3
+s6_7_name_1
+s6_7_name_2
+s6_7_name_3
+s7_8_name_1
+s7_8_name_2
+s7_8_name_3
+s8_9_name_1
+s8_9_name_2
+s8_9_name_3
+
+s1_2_num_1
+s1_2_num_2
+s1_2_num_3
+s2_3_num_1
+s2_3_num_2
+s2_3_num_3
+s3_4_num_1
+s3_4_num_2
+s3_4_num_3
+s4_5_num_1
+s4_5_num_2
+s4_5_num_3
+s5_6_num_1
+s5_6_num_2
+s5_6_num_3
+s6_7_num_1
+s6_7_num_2
+s6_7_num_3
+s7_8_num_1
+s7_8_num_2
+s7_8_num_3
+s8_9_num_1
+s8_9_num_2
+s8_9_num_3
+
+
+
+
+        NO = NO,
+        name = name ,
+        class_s = class_s ,
+        star = star ,
+        hougu_name_1 = hougu_name_1,
+        hougu_name_2 = hougu_name_2,
+        hougu_syurui = hougu_syurui,
+        hougu_color = hougu_color,
+        hougu_lv = hougu_lv,
+        shincho = shincho,
+        taiju = taiju,
+        source = source,
+        country = country,
+        zokusei_1 = zokusei_1 ,
+        zokusei_2 = zokusei_2 ,
+        sex = sex,
+        st1 = st1,
+        st2 = st2,
+        st3 = st3,
+        st4 = st4,
+        st5 = st5,
+        st6 = st6,
+        day = day,
+        skill_1 = skill_1,
+        skill_2 = skill_2,
+        skill_3 = skill_3,
+        seihai = seihai ,
+        url = url,
+        me = me,
+        you = you,
+        he_she = he_she,
+        master = master
+
+
+
+
+    parent_6_4

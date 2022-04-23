@@ -1,0 +1,1493 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<form action="{{url_for('update_check')}}" method="POST">
+    <table>
+        <tr>
+            <td>No.</td>
+            <td>
+                <input type="number" name="NO" min="0" required value="{{ savant.NO }}">
+            </td>
+        </tr>
+        <tr>
+            <td>サーヴァント名</td>
+            <td>
+                <input type="text" name="name" required maxlength="50" value="{{ savant.name }}">
+            </td>
+        </tr>
+        <tr>
+            <td>クラス</td>
+            <td>
+                <input type="text" name="class_s" list="class_list" maxlength="10" required value="{{ savant.class_s }}">
+                <datalist id="class_list">
+                    <option value="セイバー">セイバー</option>
+                    <option value="アーチャー">アーチャー</option>
+                    <option value="ランサー">ランサー</option>
+                    <option value="ライダー">ライダー</option>
+                    <option value="アサシン">アサシン</option>
+                    <option value="キャスター">キャスター</option>
+                    <option value="バーサーカー">バーサーカー</option>
+                    <option value="ルーラー">ルーラー</option>
+                    <option value="アヴェンジャー">アヴェンジャー</option>
+                    <option value="ムーンキャンサー">ムーンキャンサー</option>
+                    <option value="アルターエゴ">アルターエゴ</option>
+                    <option value="フォーリナー">フォーリナー</option>
+                    <option value="プリテンダー">プリテンダー</option>
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td>レアリティ</td>
+            <td>
+                <input type="text" name="star" list="star_list" required value="{{ savant.star }}">
+                <datalist id="star_list">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td>宝具名</td>
+            <td><input type="text" name="hougu_name" required maxlength="80" value="{{ savant.hougu_name }}"></td>
+        </tr>
+        <tr>
+            <td>宝具タイプ</td>
+            <td>
+                対象
+                <input type="text" name="hougu_syurui" list="syurui_list" required maxlength="10" value="{{ savant.hougu_syurui }}">
+                <datalist id="syurui_list">
+                    <option value="単体">単体</option>
+                    <option value="全体">全体</option>
+                    <option value="サポート">サポート</option>
+                </datalist>
+                タイプ
+                <input type="text" name="hougu_color" list="color_list" required maxlength="10" value="{{ savant.hougu_color }}">
+                <datalist id="color_list">
+                    <option value="バスター">バスター</option>
+                    <option value="アーツ">アーツ</option>
+                    <option value="クイック">クイック</option>
+                </datalist>
+                宝具Lv
+                <select name="hougu_lv">
+                    <option value="1" {% if savant.hougu_lv == 1 %} selected {% endif %}>1</option>
+                    <option value="2" {% if savant.hougu_lv == 2 %} selected {% endif %}>2</option>
+                    <option value="3" {% if savant.hougu_lv == 3 %} selected {% endif %}>3</option>
+                    <option value="4" {% if savant.hougu_lv == 4 %} selected {% endif %}>4</option>
+                    <option value="5" {% if savant.hougu_lv == 5 %} selected {% endif %}>5</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>身長/体重</td>
+            <td>
+                <input type="text" name="shincho" required maxlength="20" value="{{ savant.shincho }}">cm/
+                <input type="text" name="taiju" maxlength="20" required value="{{ savant.taiju }}">kg
+            </td>
+        </tr>
+        <tr>
+            <td>出典</td>
+            <td><input type="text" name="source" required maxlength="100" value="{{ savant.source }}"></td>
+        </tr>
+        <tr>
+            <td>地域</td>
+            <td><input type="text" name="country" required maxlength="100" value="{{ savant.country }}"></td>
+        </tr>
+        <tr>
+            <td>属性</td>
+            <td>
+                <input type="text" name="zokusei_1" list="zokusei_1_list" maxlength="10" required value="{{ savant.zokusei_1 }}">
+                <datalist id="zokusei_1_list">
+                    <option value="秩序">秩序</option>
+                    <option value="中立">中立</option>
+                    <option value="混沌">混沌</option>
+                </datalist>
+                <input type="text" name="zokusei_2" list="zokusei_2_list" maxlength="10" required value="{{ savant.zokusei_2 }}">
+                <datalist id="zokusei_2_list">
+                    <option value="善">善</option>
+                    <option value="中庸">中庸</option>
+                    <option value="悪">悪</option>
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td>性別</td>
+            <td>
+                <input type="text" name="sex" list="sex_list" required maxlength="10" value="{{ savant.sex }}">
+                <datalist id="sex_list">
+                    <option value="女">女</option>
+                    <option value="男">男</option>
+                    <option value="？">？</option>
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="3">パラメーター</td>
+            <td>
+                筋力
+                <input type="text" name="st1" maxlength="10" required value="{{ savant.st1 }}">
+                耐久
+                <input type="text" name="st4" maxlength="10" required value="{{ savant.st4 }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                敏捷
+                <input type="text" name="st2" maxlength="10" required value="{{ savant.st2 }}">
+                魔力
+                <input type="text" name="st5" maxlength="10" required value="{{ savant.st5 }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                幸運
+                <input type="text" name="st3" maxlength="10" required value="{{ savant.st3 }}">
+                宝具
+                <input type="text" name="st6" maxlength="10" required value="{{ savant.st6 }}">
+            </td>
+        </tr>
+        <tr>
+          <td>Lv100時</td>
+          <td>
+            HP
+            <input type="number" name="hp" value={{ savant.hp }} style="width: 70px;">
+            ATK
+            <input type="number" name="atk" value={{ savant.atk }} style="width: 70px;">
+          </td>
+        </tr>
+        <tr>
+            <td>召喚日</td>
+            <td><input type="date" name="day" value="{{ savant.day }}"></td>
+        </tr>
+        <tr>
+            <td>スキル</td>
+            <td>
+                <input type="number" name="skill_1" min="0" max="10" value="{{ savant.skill_1 }}">
+                <input type="number" name="skill_2" min="0" max="10" value="{{ savant.skill_2 }}">
+                <input type="number" name="skill_3" min="0" max="10" value="{{ savant.skill_3 }}">
+            </td>
+        </tr>
+        <tr>
+          <td>絆</td>
+          <td>
+              <input type="number" name="kizuna" min="0" value="{{ savant.kizuna }}">
+          </td>
+      </tr>
+        <tr>
+            <td>聖杯</td>
+            <td>
+                <input type="number" name="seihai" min="0" value="{{ savant.seihai }}">
+            </td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td><input type="text" name="url" maxlength="400" value="{{ savant.url }}"></td>
+        </tr>
+        <tr>
+            <td>一人称</td>
+            <td><input type="text" name="me" maxlength="50" value="{{ savant.me }}"></td>
+        </tr>
+        <tr>
+            <td>二人称</td>
+            <td><input type="text" name="you" maxlength="50" value="{{ savant.you }}"></td>
+        </tr>
+        <tr>
+            <td>三人称</td>
+            <td><input type="text" name="he_she" maxlength="50" value="{{ savant.he_she }}"></td>
+        </tr>
+        <tr>
+            <td>マスター</td>
+            <td><input type="text" name="master" maxlength="50" value="{{ savant.master }}"></td>
+        </tr>
+        <tr>
+            <td>検索用メモ</td>
+            <td>
+              <textarea name="memo" cols="30" rows="10">{{ savant.memo }}</textarea>
+            </td>
+        </tr>
+    </table>
+    <div style="margin: 16px  4px;">
+      <button type="submit">登録</button>
+    </div>
+    <br>
+    <table>
+        <tr>
+            <td rowspan="3">１→２</td>
+            <td>
+                <select class="parent_1_1">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_1_1" name="1_2_name_1"  style="width: 10em;" {% if not use_sozai.s1_2_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s1_2_name_1 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="1_2_num_1" value={{ use_sozai.s1_2_num_1 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_1_2">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_1_2" name="1_2_name_2"  style="width: 10em;" {% if not use_sozai.s1_2_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s1_2_name_2 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="1_2_num_2" value={{ use_sozai.s1_2_num_2 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_1_3">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_1_3" name="1_2_name_3"  style="width: 10em;" {% if not use_sozai.s1_2_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s1_2_name_3 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="1_2_num_3" value={{ use_sozai.s1_2_num_3 }}>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="4">２→３</td>
+            <td>
+                <select class="parent_2_1">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_2_1" name="2_3_name_1"  style="width: 10em;" {% if not use_sozai.s1_2_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s2_3_name_1 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="2_3_num_1" value={{ use_sozai.s2_3_num_1 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_2_2">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_2_2" name="2_3_name_2"  style="width: 10em;" {% if not use_sozai.s2_3_name_2 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s2_3_name_2 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="2_3_num_2" value={{ use_sozai.s2_3_num_2 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_2_3">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_2_3" name="2_3_name_3"  style="width: 10em;" {% if not use_sozai.s2_3_name_3 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s2_3_name_3 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="2_3_num_3" value={{ use_sozai.s2_3_num_3 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_2_4">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_2_4" name="2_3_name_4"  style="width: 10em;" {% if not use_sozai.s2_3_name_4 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s2_3_name_4 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="2_3_num_4" value={{ use_sozai.s2_3_num_4 }}>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="3">３→４</td>
+            <td>
+                <select class="parent_3_1">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_3_1" name="3_4_name_1"  style="width: 10em;" {% if not use_sozai.s3_4_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s3_4_name_1 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="3_4_num_1" value={{ use_sozai.s3_4_num_1 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_3_2">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_3_2" name="3_4_name_2"  style="width: 10em;" {% if not use_sozai.s3_4_name_2 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s3_4_name_2 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="3_4_num_2" value={{ use_sozai.s3_4_num_2 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_3_3">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_3_3" name="3_4_name_3"  style="width: 10em;" {% if not use_sozai.s3_4_name_3 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s3_4_name_3 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="3_4_num_3" value={{ use_sozai.s3_4_num_3 }}>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="4">４→５</td>
+            <td>
+                <select class="parent_4_1">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_4_1" name="4_5_name_1"  style="width: 10em;" {% if not use_sozai.s4_5_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s4_5_name_1 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="4_5_num_1" value={{ use_sozai.s4_5_num_1 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_4_2">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_4_2" name="4_5_name_2"  style="width: 10em;" {% if not use_sozai.s4_5_name_2 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s4_5_name_2 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="4_5_num_2" value={{ use_sozai.s4_5_num_2 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_4_3">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_4_3" name="4_5_name_3"  style="width: 10em;" {% if not use_sozai.s4_5_name_3 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s4_5_name_3 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="4_5_num_3" value={{ use_sozai.s4_5_num_3 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_4_4">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_4_4" name="4_5_name_4"  style="width: 10em;" {% if not use_sozai.s4_5_name_4 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s4_5_name_4 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="4_5_num_4" value={{ use_sozai.s4_5_num_4 }}>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="3">５→６</td>
+            <td>
+                <select class="parent_5_1">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_5_1" name="5_6_name_1"  style="width: 10em;" {% if not use_sozai.s5_6_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s5_6_name_1 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="5_6_num_1" value={{ use_sozai.s5_6_num_1 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_5_2">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_5_2" name="5_6_name_2"  style="width: 10em;" {% if not use_sozai.s5_6_name_2 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s5_6_name_2 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="5_6_num_2" value={{ use_sozai.s5_6_num_2 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_5_3">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_5_3" name="5_6_name_3"  style="width: 10em;" {% if not use_sozai.s5_6_name_3 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s5_6_name_3 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="5_6_num_3" value={{ use_sozai.s5_6_num_3 }}>
+            </td>
+        </tr>
+
+        <tr>
+            <td rowspan="4">６→７</td>
+            <td>
+                <select class="parent_6_1">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_6_1" name="6_7_name_1"  style="width: 10em;" {% if not use_sozai.s6_7_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s6_7_name_1 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="6_7_num_1" value={{ use_sozai.s6_7_num_1 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_6_2">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_6_2" name="6_7_name_2"  style="width: 10em;" {% if not use_sozai.s6_7_name_2 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s6_7_name_2 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="6_7_num_2" value={{ use_sozai.s6_7_num_2 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_6_3">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_6_3" name="6_7_name_3"  style="width: 10em;" {% if not use_sozai.s6_7_name_3 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s6_7_name_3 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="6_7_num_3" value={{ use_sozai.s6_7_num_3 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_6_4">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_6_4" name="6_7_name_4"  style="width: 10em;" {% if not use_sozai.s6_7_name_4 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s6_7_name_4 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="6_7_num_4" value={{ use_sozai.s6_7_num_4 }}>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">７→８</td>
+            <td>
+                <select class="parent_7_1">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_7_1" name="7_8_name_1"  style="width: 10em;" {% if not use_sozai.s7_8_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s7_8_name_1 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="7_8_num_1" value={{ use_sozai.s7_8_num_1 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_7_2">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_7_2" name="7_8_name_2"  style="width: 10em;" {% if not use_sozai.s7_8_name_2 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s7_8_name_2 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="7_8_num_2" value={{ use_sozai.s7_8_num_2 }}>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">８→９</td>
+            <td>
+                <select class="parent_8_1">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_8_1" name="8_9_name_1"  style="width: 10em;" {% if not use_sozai.s8_9_name_1 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s8_9_name_1 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="8_9_num_1" value={{ use_sozai.s8_9_num_1 }}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="parent_8_2">
+                    <option value="" >選択▼</option>
+                    <option value="銅素材">銅素材</option>
+                    <option value="銀素材">銀素材</option>
+                    <option value="金素材">金素材</option>
+                    <option value="輝石（青）">輝石（青）</option>
+                    <option value="魔石（赤）">魔石（赤）</option>
+                    <option value="秘石（金）">秘石（金）</option>
+                </select>
+                <select class="children_8_2" name="8_9_name_2"  style="width: 10em;" {% if not use_sozai.s8_9_name_2 %} disabled {% endif %}>
+                    <option value="" >選択▼</option>
+                    {% for val in sozai_list %}
+                    <option value="{{val.name}}" data-val="{{val.shurui}}" {% if use_sozai.s8_9_name_2 == val.name %} selected {% endif %}>{{val.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="8_9_num_2" value={{ use_sozai.s8_9_num_2 }}>
+            </td>
+        </tr>
+    </table>
+    <div style="margin: 16px  4px;">
+        <button type="submit">登録</button>
+    </div>
+</form>
+
+<script>
+
+
+// -------------------------------------------------------------------------------------------
+var $children_1_1 = $('.children_1_1'); //都道府県の要素を変数に入れます。
+var original_1_1 = $children_1_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_1_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_1_1)を入れておく
+  $children_1_1.html(original_1_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_1_1.attr('disabled', 'disabled');
+  } else {
+    $children_1_1.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_1_2 = $('.children_1_2'); //都道府県の要素を変数に入れます。
+var original_1_2 = $children_1_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_1_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_1_2)を入れておく
+  $children_1_2.html(original_1_2).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_1_2.attr('disabled', 'disabled');
+  } else {
+    $children_1_2.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_1_3 = $('.children_1_3'); //都道府県の要素を変数に入れます。
+var original_1_3 = $children_1_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_1_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_1_3)を入れておく
+  $children_1_3.html(original_1_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_1_3.attr('disabled', 'disabled');
+  } else {
+    $children_1_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_2_1 = $('.children_2_1'); //都道府県の要素を変数に入れます。
+var original_2_1 = $children_2_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_2_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_2_1)を入れておく
+  $children_2_1.html(original_2_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_2_1.attr('disabled', 'disabled');
+  } else {
+    $children_2_1.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_2_2 = $('.children_2_2'); //都道府県の要素を変数に入れます。
+var original_2_2 = $children_2_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_2_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_2_2)を入れておく
+  $children_2_2.html(original_2_2).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_2_2.attr('disabled', 'disabled');
+  } else {
+    $children_2_2.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_2_3 = $('.children_2_3'); //都道府県の要素を変数に入れます。
+var original_2_3 = $children_2_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_2_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_2_3)を入れておく
+  $children_2_3.html(original_2_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_2_3.attr('disabled', 'disabled');
+  } else {
+    $children_2_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_2_4 = $('.children_2_4'); //都道府県の要素を変数に入れます。
+var original_2_4 = $children_2_4.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_2_4').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_2_3)を入れておく
+  $children_2_4.html(original_2_4).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_2_3.attr('disabled', 'disabled');
+  } else {
+    $children_2_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_3_1 = $('.children_3_1'); //都道府県の要素を変数に入れます。
+var original_3_1 = $children_3_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_3_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_3_1)を入れておく
+  $children_3_1.html(original_3_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_3_1.attr('disabled', 'disabled');
+  } else {
+    $children_3_1.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_3_2 = $('.children_3_2'); //都道府県の要素を変数に入れます。
+var original_3_2 = $children_3_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_3_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_3_2)を入れておく
+  $children_3_2.html(original_3_2).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_3_2.attr('disabled', 'disabled');
+  } else {
+    $children_3_2.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_3_3 = $('.children_3_3'); //都道府県の要素を変数に入れます。
+var original_3_3 = $children_3_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_3_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_3_3)を入れておく
+  $children_3_3.html(original_3_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_3_3.attr('disabled', 'disabled');
+  } else {
+    $children_3_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_4_1 = $('.children_4_1'); //都道府県の要素を変数に入れます。
+var original_4_1 = $children_4_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_4_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_4_1)を入れておく
+  $children_4_1.html(original_4_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_4_1.attr('disabled', 'disabled');
+  } else {
+    $children_4_1.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_4_2 = $('.children_4_2'); //都道府県の要素を変数に入れます。
+var original_4_2 = $children_4_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_4_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_4_2)を入れておく
+  $children_4_2.html(original_4_2).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_4_2.attr('disabled', 'disabled');
+  } else {
+    $children_4_2.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_4_3 = $('.children_4_3'); //都道府県の要素を変数に入れます。
+var original_4_3 = $children_4_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_4_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_4_3)を入れておく
+  $children_4_3.html(original_4_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_4_3.attr('disabled', 'disabled');
+  } else {
+    $children_4_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_4_4 = $('.children_4_4'); //都道府県の要素を変数に入れます。
+var original_4_4 = $children_4_4.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_4_4').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_4_4)を入れておく
+  $children_4_4.html(original_4_4).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_4_4.attr('disabled', 'disabled');
+  } else {
+    $children_4_4.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_5_1 = $('.children_5_1'); //都道府県の要素を変数に入れます。
+var original_5_1 = $children_5_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_5_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_5_1)を入れておく
+  $children_5_1.html(original_5_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_5_1.attr('disabled', 'disabled');
+  } else {
+    $children_5_1.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_5_2 = $('.children_5_2'); //都道府県の要素を変数に入れます。
+var original_5_2 = $children_5_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_5_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_5_2)を入れておく
+  $children_5_2.html(original_5_2).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_5_2.attr('disabled', 'disabled');
+  } else {
+    $children_5_2.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_5_3 = $('.children_5_3'); //都道府県の要素を変数に入れます。
+var original_5_3 = $children_5_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_5_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_5_3)を入れておく
+  $children_5_3.html(original_5_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_5_3.attr('disabled', 'disabled');
+  } else {
+    $children_5_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_6_1 = $('.children_6_1'); //都道府県の要素を変数に入れます。
+var original_6_1 = $children_6_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_6_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_6_1)を入れておく
+  $children_6_1.html(original_6_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_6_1.attr('disabled', 'disabled');
+  } else {
+    $children_6_1.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_6_2 = $('.children_6_2'); //都道府県の要素を変数に入れます。
+var original_6_2 = $children_6_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_6_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_6_2)を入れておく
+  $children_6_2.html(original_6_2).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_6_2.attr('disabled', 'disabled');
+  } else {
+    $children_6_2.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_6_3 = $('.children_6_3'); //都道府県の要素を変数に入れます。
+var original_6_3 = $children_6_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_6_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_6_3)を入れておく
+  $children_6_3.html(original_6_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_6_3.attr('disabled', 'disabled');
+  } else {
+    $children_6_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_6_4 = $('.children_6_4'); //都道府県の要素を変数に入れます。
+var original_6_4 = $children_6_4.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_6_4').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_6_4)を入れておく
+  $children_6_4.html(original_6_4).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_6_4.attr('disabled', 'disabled');
+  } else {
+    $children_6_4.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_7_1 = $('.children_7_1'); //都道府県の要素を変数に入れます。
+var original_7_1 = $children_7_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_7_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_7_1)を入れておく
+  $children_7_1.html(original_7_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_7_1.attr('disabled', 'disabled');
+  } else {
+    $children_7_1.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_7_2 = $('.children_7_2'); //都道府県の要素を変数に入れます。
+var original_7_2 = $children_7_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_7_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_7_2)を入れておく
+  $children_7_2.html(original_7_2).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_7_2.attr('disabled', 'disabled');
+  } else {
+    $children_7_2.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_7_3 = $('.children_7_3'); //都道府県の要素を変数に入れます。
+var original_7_3 = $children_7_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_7_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_7_3)を入れておく
+  $children_7_3.html(original_7_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_7_3.attr('disabled', 'disabled');
+  } else {
+    $children_7_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_8_1 = $('.children_8_1'); //都道府県の要素を変数に入れます。
+var original_8_1 = $children_8_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_8_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_8_1)を入れておく
+  $children_8_1.html(original_8_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_8_1.attr('disabled', 'disabled');
+  } else {
+    $children_8_1.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_8_2 = $('.children_8_2'); //都道府県の要素を変数に入れます。
+var original_8_2 = $children_8_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_8_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_8_2)を入れておく
+  $children_8_2.html(original_8_2).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_8_2.attr('disabled', 'disabled');
+  } else {
+    $children_8_2.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+var $children_8_3 = $('.children_8_3'); //都道府県の要素を変数に入れます。
+var original_8_3 = $children_8_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_8_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_8_3)を入れておく
+  $children_8_3.html(original_8_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    //valueと異なるdata-valを持つ要素を削除
+    if (val1 != val2) {
+      $(this).not(':first-child').remove();
+    }
+ 
+  });
+ 
+  //地方側のselect要素が未選択の場合、都道府県をdisabledにする
+  if ($(this).val() == "") {
+    $children_8_3.attr('disabled', 'disabled');
+  } else {
+    $children_8_3.removeAttr('disabled');
+  }
+});
+// ---------------------------------------------------------------------------------------------
+</script>
+
+{% endblock %}

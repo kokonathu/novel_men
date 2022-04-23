@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block body %}
+<div><a href="{{url_for('sozai_new')}}" style="font-size: 60%;">素材自体の登録へ</a></div>
+
+<form action="{{url_for('sozai_up_grade')}}" method="POST">
+    <div class="yoko">
+        <table class="sozai">
+            <tr>
+                <th colspan="3">銅素材</th>
+            </tr>
+            <tr>
+                <td>素材名</td>
+                <td>所持数</td>
+            </tr>
+            {% for val in sozai_list %}
+                {% if val.shurui == "銅素材" %}
+                    <tr>
+                        <td>{{val.name}}</td>
+                        <td><input type="number" name="{{val.name}}" value="{{val.num}}"></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        <table class="sozai">
+            <tr>
+                <th colspan="3">銀素材</th>
+            </tr>
+            <tr>
+                <td>素材名</td>
+                <td>所持数</td>
+            </tr>
+            {% for val in sozai_list %}
+                {% if val.shurui == "銀素材" %}
+                <tr>
+                    <td>{{val.name}}</td>
+                    <td><input type="number" name="{{val.name}}" value="{{val.num}}"></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        <table class="sozai">
+            <tr>
+                <th colspan="3">金素材</th>
+            </tr>
+            <tr>
+                <td>素材名</td>
+                <td>所持数</td>
+            </tr>
+            {% for val in sozai_list %}
+                {% if val.shurui == "金素材" %}
+                <tr>
+                    <td>{{val.name}}</td>
+                    <td><input type="number" name="{{val.name}}" value="{{val.num}}"></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="yoko">
+
+        <table class="sozai">
+            <tr>
+                <th colspan="3">輝石（青）</th>
+            </tr>
+            <tr>
+                <td>素材名</td>
+                <td>所持数</td>
+            </tr>
+            {% for val in sozai_list %}
+                {% if val.shurui == "輝石（青）" %}
+                <tr>
+                    <td>{{val.name}}</td>
+                    <td><input type="number" name="{{val.name}}" value="{{val.num}}"></td>
+                </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+        <table class="sozai">
+            <tr>
+                <th colspan="3">魔石（赤）</th>
+            </tr>
+            <tr>
+                <td>素材名</td>
+                <td>所持数</td>
+            </tr>
+            {% for val in sozai_list %}
+                {% if val.shurui == "魔石（赤）" %}
+                <tr>
+                    <td>{{val.name}}</td>
+                    <td><input type="number" name="{{val.name}}" value="{{val.num}}"></td>
+                </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+        <table class="sozai">
+            <tr>
+                <th colspan="3">秘石（金）</th>
+            </tr>
+            <tr>
+                <td>素材名</td>
+                <td>所持数</td>
+            </tr>
+            {% for val in sozai_list %}
+                {% if val.shurui == "秘石（金）" %}
+                <tr>
+                    <td>{{val.name}}</td>
+                    <td><input type="number" name="{{val.name}}" value="{{val.num}}"></td>
+                </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+    </div>
+    <button type="submit" style="margin: 0 20px;">更新</button>
+</form>
+<br><br><br><br>
+<form action="{{url_for('sozai_reset')}}" method="POST">
+    <button type="submit" style="margin: 0 20px;">数値初期化</button>
+</form>
+<br>
+<br>
+
+{% endblock %}

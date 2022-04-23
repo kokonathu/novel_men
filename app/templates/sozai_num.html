@@ -1,0 +1,710 @@
+{% extends "layout.html" %}
+{% block body %}
+<div><a href="{{url_for('sozai_up')}}" style="font-size: 60%;">所持素材登録へ</a></div>
+
+<div class="yoko">
+    <table class="sozai border">
+        <tr>
+            <th colspan="3">銅素材</th>
+        </tr>
+        <tr>
+            <td>素材名</td>
+            <td>必要数</td>
+            <td>所持数</td>
+        </tr>
+        {% for val in sozai_list %}
+            {% if val.shurui == "銅素材" %}
+                {% for k,v in use_sozai_list.items() %}
+                    {% if val.name == k %}
+                        <tr>
+                            <td>{{val.name}}</td>
+                            <td>{{ v }}</td>
+                            {% if v > val.num %}
+                            <td style="background-color: tomato;color: white;">{{val.num}}</td>
+                            
+                            {% else %}
+                            <td>{{val.num}}</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </table>
+    <table class="sozai border">
+        <tr>
+            <th colspan="3">銀素材</th>
+        </tr>
+        <tr>
+            <td>素材名</td>
+            <td>必要数</td>
+            <td>所持数</td>
+        </tr>
+        {% for val in sozai_list %}
+            {% if val.shurui == "銀素材" %}
+                {% for k,v in use_sozai_list.items() %}
+                    {% if val.name == k %}
+                        <tr>
+                            <td>{{val.name}}</td>
+                            <td>{{ v }}</td>
+                            {% if v > val.num %}
+                            <td style="background-color: tomato;color: white;">{{val.num}}</td>
+                            
+                            {% else %}
+                            <td>{{val.num}}</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </table>
+    <table class="sozai border">
+        <tr>
+            <th colspan="3">金素材</th>
+        </tr>
+        <tr>
+            <td>素材名</td>
+            <td>必要数</td>
+            <td>所持数</td>
+        </tr>
+        {% for val in sozai_list %}
+            {% if val.shurui == "金素材" %}
+                {% for k,v in use_sozai_list.items() %}
+                    {% if val.name == k %}
+                        <tr>
+                            <td>{{val.name}}</td>
+                            <td>{{ v }}</td>
+                            {% if v > val.num %}
+                                <td style="background-color: tomato;color: white;">{{val.num}}</td>
+                            {% else %}
+                            <td>{{val.num}}</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </table>
+</div>
+
+<div class="yoko">
+
+<table class="sozai border">
+    <tr>
+        <th colspan="3">輝石（青）</th>
+    </tr>
+    <tr>
+        <td>素材名</td>
+        <td>必要数</td>
+        <td>所持数</td>
+    </tr>
+    {% for val in sozai_list %}
+        {% if val.shurui == "輝石（青）" %}
+        {% for k,v in use_sozai_list.items() %}
+        {% if val.name == k %}
+            <tr>
+                <td>{{val.name}}</td>
+                <td>{{ v }}</td>
+                {% if v > val.num %}
+                <td style="background-color: tomato;color: white;">{{val.num}}</td>
+                
+                {% else %}
+                <td>{{val.num}}</td>
+                {% endif %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endfor %}
+</table>
+<table class="sozai border">
+    <tr>
+        <th colspan="3">魔石（赤）</th>
+    </tr>
+    <tr>
+        <td>素材名</td>
+        <td>必要数</td>
+        <td>所持数</td>
+    </tr>
+    {% for val in sozai_list %}
+        {% if val.shurui == "魔石（赤）" %}
+        {% for k,v in use_sozai_list.items() %}
+        {% if val.name == k %}
+            <tr>
+                <td>{{val.name}}</td>
+                <td>{{ v }}</td>
+                {% if v > val.num %}
+                <td style="background-color: tomato;color: white;">{{val.num}}</td>
+                
+                {% else %}
+                <td>{{val.num}}</td>
+                {% endif %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endfor %}
+</table>
+<table class="sozai border">
+    <tr>
+        <th colspan="3">秘石（金）</th>
+    </tr>
+    <tr>
+        <td>素材名</td>
+        <td>必要数</td>
+        <td>所持数</td>
+    </tr>
+    {% for val in sozai_list %}
+        {% if val.shurui == "秘石（金）" %}
+        {% for k,v in use_sozai_list.items() %}
+        {% if val.name == k %}
+            <tr>
+                <td>{{val.name}}</td>
+                <td>{{ v }}</td>
+                {% if v > val.num %}
+                <td style="background-color: tomato;color: white;">{{val.num}}</td>
+                
+                {% else %}
+                <td>{{val.num}}</td>
+                {% endif %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endfor %}
+</table>
+
+</div>
+
+{{red_list}}
+
+<br>
+
+<div class="box ikusei">
+<form action="{{url_for('sozai_view')}}" method="POST">
+    <table class="sv_list">
+        <tr>
+            <th colspan="3">育成予定サーヴァント</th>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_1">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_1">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}"  data-val="{{savant.class_s}}"{% if int_skill_up_list[0] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[0] %}
+                        {% for name, num in over_sozai.items() %}
+                            <span style="white-space: nowrap;">{{name}}<span style="color: tomato;">{{num}}個　</span></span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_2">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_2">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[1] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[1] %}
+                        {% for name, num in over_sozai.items() %}
+                        <span style="white-space: nowrap;">{{name}}<span style="color: tomato;">{{num}}個　</span></span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_3">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_3">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[2] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[2] %}
+                        {% for name, num in over_sozai.items() %}
+                            {{name}}<span style="color: tomato;">{{num}}個　</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_4">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_4">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[3] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[3] %}
+                        {% for name, num in over_sozai.items() %}
+                            {{name}}<span style="color: tomato;">{{num}}個　</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_5">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_5">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[4] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[4] %}
+                        {% for name, num in over_sozai.items() %}
+                            {{name}}<span style="color: tomato;">{{num}}個　</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_6">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_6">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[5] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[5] %}
+                        {% for name, num in over_sozai.items() %}
+                            {{name}}<span style="color: tomato;">{{num}}個　</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_7">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_7">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[6] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[6] %}
+                        {% for name, num in over_sozai.items() %}
+                            {{name}}<span style="color: tomato;">{{num}}個　</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_8">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_8">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[7] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[7] %}
+                        {% for name, num in over_sozai.items() %}
+                            {{name}}<span style="color: tomato;">{{num}}個　</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_9">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_9">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[8] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[8] %}
+                        {% for name, num in over_sozai.items() %}
+                            {{name}}<span style="color: tomato;">{{num}}個　</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="test-select2 parent_10">
+                    <option value="" selected="selected">選択▼</option>
+                    {% for class_name in class_list %}
+                        <option value="{{class_name.class_s}}">{{class_name.class_s}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="skill_up_list" class="test-select2 children_10">
+                    <option value=" "> </option>
+                    {% for savant in savant_list %}
+                        <option value="{{savant.NO}}" data-val="{{savant.class_s}}" {% if int_skill_up_list[9] == savant.NO %}selected{% endif %}>{{savant.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="husoku_data">
+                {% for over_savant, over_sozai in over_savant_list.items() %}
+                    {% if over_savant == int_skill_up_list[9] %}
+                        {% for name, num in over_sozai.items() %}
+                            {{name}}<span style="color: tomato;">{{num}}個　</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">更新</button></td>
+        </tr>
+    </table>
+</form>
+<br>
+
+</div>
+<form action="{{url_for('sozai_view')}}" method="POST">
+    <input type="hidden" name="reset" value="reset">
+    <button type="submit">リセット</button>
+</form>
+<br>
+<script>
+
+$(function() {
+  $('.test-select2').select2({
+    language: "ja" //日本語化
+  });
+})
+
+$('#select2').select2({
+    dropdownAutoWidth: true,
+    // width: 'auto'
+})
+
+// ---------------------------------------------------------------------------------------------
+var $children_1 = $('.children_1'); //都道府県の要素を変数に入れます。
+var original_1 = $children_1.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_1').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_1)を入れておく
+  $children_1.html(original_1).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+
+// ---------------------------------------------------------------------------------------------
+var $children_2 = $('.children_2'); //都道府県の要素を変数に入れます。
+var original_2 = $children_2.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_2').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1_2 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_2)を入れておく
+  $children_2.html(original_2).find('option').each(function() {
+    var val2_2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1_2 != "") {
+        if (val1_2 != val2_2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+var $children_3 = $('.children_3'); //都道府県の要素を変数に入れます。
+var original_3 = $children_3.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_3').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_3)を入れておく
+  $children_3.html(original_3).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+var $children_4 = $('.children_4'); //都道府県の要素を変数に入れます。
+var original_4 = $children_4.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_4').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_4)を入れておく
+  $children_4.html(original_4).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+var $children_5 = $('.children_5'); //都道府県の要素を変数に入れます。
+var original_5 = $children_5.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_5').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_5)を入れておく
+  $children_5.html(original_5).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+var $children_6 = $('.children_6'); //都道府県の要素を変数に入れます。
+var original_6 = $children_6.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_6').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_6)を入れておく
+  $children_6.html(original_6).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+var $children_7 = $('.children_7'); //都道府県の要素を変数に入れます。
+var original_7 = $children_7.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_7').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_7)を入れておく
+  $children_7.html(original_7).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+var $children_8 = $('.children_8'); //都道府県の要素を変数に入れます。
+var original_8 = $children_8.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_8').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_8)を入れておく
+  $children_8.html(original_8).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+var $children_9 = $('.children_9'); //都道府県の要素を変数に入れます。
+var original_8 = $children_9.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_8').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_8)を入れておく
+  $children_9.html(original_8).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+var $children_10 = $('.children_10'); //都道府県の要素を変数に入れます。
+var original_10 = $children_10.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+ 
+//地方側のselect要素が変更になるとイベントが発生
+$('.parent_10').change(function() {
+ 
+  //選択された地方のvalueを取得し変数に入れる
+  var val1 = $(this).val();
+ 
+  //削除された要素をもとに戻すため.html(original_10)を入れておく
+  $children_10.html(original_10).find('option').each(function() {
+    var val2 = $(this).data('val'); //data-valの値を取得
+ 
+    if (val1 != "") {
+        if (val1 != val2) {
+        $(this).not(':first-child').remove();
+        }
+    }
+ 
+  });
+});
+// ---------------------------------------------------------------------------------------------
+</script>
+
+{% endblock %}
