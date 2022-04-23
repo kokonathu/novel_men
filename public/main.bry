@@ -1,0 +1,47 @@
+import json
+
+import browser
+from browser import ajax
+
+browser.console.log("This is brython.")
+
+browser.document.getElementById("new_task_input").value = ""
+
+
+"""
+taskをタスクリストに追加する
+"""
+
+
+def add_task(task_name: str):
+    # POSTする
+    ajax.post(
+        url="http://localhost:3000/register/",
+        headers={"Content-Type": "application/json", },
+        data=json.dumps({"title": task_name, "detail": "detail"})
+    )
+
+    # DOM操作
+    new_task_checkbox = browser.document.createElement("input")
+    new_task_checkbox.type = "checkbox"
+
+    new_task_name = browser.document.createElement("div")
+    new_task_name.text = task_name
+
+    new_task = browser.document.createElement("div")
+    new_task.class_name = "task"
+
+    new_task.appendChild(new_task_checkbox)
+    new_task.appendChild(new_task_name)
+
+    browser.document["tasks_area"].appendChild(new_task)
+
+# -----------------------------------------------------------------
+# 制御
+# -----------------------------------------------------------------
+
+
+# 登録ボタン
+@browser.bind(browser.document["new_task_register"], "click")
+def register_new_task(ev):
+    add_task(browser.document["new_task_input"].value)
