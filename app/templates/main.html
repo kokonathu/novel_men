@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block title %}面付けフォーム{% endblock %}
+{% block body %}
+
+<div >
+    <form action="{{url_for('create_two')}}" method="POST" enctype="multipart/form-data">
+        <div style="margin: 16px  4px;">
+            PDF選択<br>
+            <input type="file" name="file_data">
+        </div>
+        <br>
+        <div>
+            原稿サイズ変更<br>
+            <select name="page_size" id="">
+                <option value="" selected>元のまま</option>
+                <option value="A6">A6(文庫サイズ)</option>
+                <option value="B6">B6</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            テンプレート使用
+            <input type="checkbox" id="hide_button">
+        </div>
+        <br>
+        <div id="hide_zone" style="display: none;">
+            <div>
+                テンプレート選択
+                <input type="file" name="template_img">
+            </div>
+            <div>
+                テンプレートサイズ変更<br>
+                <select name="temp_size" id="">
+                    <option value="" selected>元のまま</option>
+                    <option value="B5">B5(原稿サイズA6推奨)</option>
+                    <option value="A4">A4(原稿サイズB6推奨)</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div>
+            <button type="submit" class="_button">UPLOAD</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function () {
+    $('#hide_button').on('click', () => {
+        if ($('#hide_zone').css('display') == 'block') {
+        // 表示されている場合の処理
+        $('#hide_zone').hide();
+        } else {
+        // 非表示の場合の処理
+        $('#hide_zone').show();
+        }
+    });
+    });
+
+</script>
+
+{% endblock %}
