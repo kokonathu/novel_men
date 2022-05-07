@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2009-2010, Pino Toscano <pino@kde.org>
- * Copyright (C) 2021, Albert Astals Cid <aacid@kde.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +23,8 @@
 
 #include <vector>
 
-namespace poppler {
+namespace poppler
+{
 
 class embedded_file_private;
 
@@ -44,7 +44,7 @@ public:
     byte_array data() const;
 
 private:
-    explicit embedded_file(embedded_file_private &dd);
+    embedded_file(embedded_file_private &dd);
 
     embedded_file_private *d;
     friend class embedded_file_private;

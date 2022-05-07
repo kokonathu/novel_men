@@ -2,44 +2,87 @@
 {% block title %}面付けフォーム{% endblock %}
 {% block body %}
 
-<div >
-    <form action="{{url_for('create_two')}}" method="POST" enctype="multipart/form-data">
-        <div style="margin: 16px  4px;">
-            PDF選択<br>
-            <input type="file" name="file_data">
+{% if make_file %}
+<div>
+    <form action="{{url_for('download')}}" method="POST">
+        <div class="button_style">
+            <label><button type="submit" style="display: none;"></button>
+                ダウンロード
+            </label>
         </div>
-        <br>
+    </form>
+</div>
+{% endif %}
+
+<div id="container" >
+    <form name="form_hoge" action="{{url_for('main')}}" method="POST" enctype="multipart/form-data">
         <div>
-            原稿サイズ変更<br>
-            <select name="page_size" id="">
-                <option value="" selected>元のまま</option>
-                <option value="A6">A6(文庫サイズ)</option>
-                <option value="B6">B6</option>
-            </select>
+            <div id="attachment">
+                <label><input type="file" name="file_data" class="fileinput">PDFファイル選択</label>
+                <br>
+                <span class="filename">選択されていません</span>
+            </div>
+            <div class="box">
+                <p>原稿サイズ変更</p>
+                <div class="cp_ipselect cp_sl01">
+                    <select name="page_size" id="">
+                        <option value="" selected>元のまま</option>
+                        <option value="A6">A6(文庫サイズ)</option>
+                        <option value="B6">B6</option>
+                    </select>
+                </div>
+            </div>
+            <div class="box">
+                <p>レイアウト変更</p>
+                <div class="cp_ipselect cp_sl01">
+                    <select name="layout" id="layout_select">
+                        <option value="" selected>2面（デフォルト）</option>
+                        <option value="men_4">4面</option>
+                        <!-- <option value="men_16">16面</option> -->
+                        <option value="men_8">8面（豆本）</option>
+                        <option value="men_ito">糸綴じ複数折り※</option>
+                    </select>
+                </div>
+                <div class="box" id="ito_page" style="display: none;">
+                    <p>何ページごとにまとめる？</p><br>
+                    <input type="number" step="4" name="ito_page">
+                </div>
+            </div>
         </div>
-        <br>
-        <div>
-            テンプレート使用
-            <input type="checkbox" id="hide_button">
+        <div class="box">
+            <p>テンプレート使用</p>
+            <label class="my-checkbox">
+                <input type="checkbox" id="hide_button" name="temp_check" >
+                <span class="checkmark"></span>
+            </label>
         </div>
-        <br>
         <div id="hide_zone" style="display: none;">
-            <div>
-                テンプレート選択
-                <input type="file" name="template_img">
+            <div id="attachment">
+                <label><input type="file" name="template_img" class="fileinput">テンプレート選択</label>
+                <br>
+                <span class="filename">選択されていません</span>
             </div>
-            <div>
-                テンプレートサイズ変更<br>
-                <select name="temp_size" id="">
-                    <option value="" selected>元のまま</option>
-                    <option value="B5">B5(原稿サイズA6推奨)</option>
-                    <option value="A4">A4(原稿サイズB6推奨)</option>
-                </select>
+            <div class="box">
+                <p>テンプレートサイズ変更</p>
+                <div class="cp_ipselect cp_sl01">
+                    <select name="temp_size" id="">
+                        <option value="" selected>元のまま</option>
+                        <option value="B5">B5(原稿サイズA6推奨)</option>
+                        <option value="A4">A4(原稿サイズB6推奨)</option>
+                    </select>
+                </div>
             </div>
         </div>
         <br>
         <div>
-            <button type="submit" class="_button">UPLOAD</button>
+            <div class="button_style" id="men_submit_button" style="display: block;">
+                <label><button type="submit" id="men_submit_button" style="display: none;"></button>
+                    アップロード
+                </label>
+            </div>
+            <div id="men_loading" style="display: none;">
+                <p>処理中……</p>
+            </div>
         </div>
     </form>
 </div>
@@ -57,6 +100,27 @@
     });
     });
 
+    const target_button = document.getElementById('men_submit_button');
+    const target_msg = document.getElementById('men_loading');
+    target_button.addEventListener('click', () => {
+        target_button.style.display = "none";
+        target_msg.style.display = "block";
+    }, false);
+
+    $('#attachment .fileinput').on('change', function () {
+        var file = $(this).prop('files')[0];
+        $(this).closest('#attachment').find('.filename').text(file.name);
+        });
+
+
+    $("#layout_select").change(function () {
+	var extraction_val = $("#layout_select").val();
+	if(extraction_val == "men_ito") {
+		$('#ito_page').css('display', 'block');
+	}else{
+		$('#ito_page').css('display', 'none');
+    }
+    });
 </script>
 
 {% endblock %}

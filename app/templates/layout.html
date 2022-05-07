@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サーヴァント管理システム</title>
+    <title>自宅製本支援ツール</title>
     <link rel="stylesheet" href="/static/CSS/main.css">
+    <link rel="stylesheet" href="/static/CSS/button.css">
+    <link rel="stylesheet" href="/static/CSS/checkbox.css">
+    <link rel="stylesheet" href="/static/CSS/selectbox.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Select2.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
@@ -17,23 +20,22 @@
 </head>
 <body>
     <div id="hedder">
-        <a href="/">TOP</a>&nbsp;
+        <a href=""><H2>{% block title %}{% endblock %}</H2></a>&nbsp;
         <!-- <a href="">素材計算</a>&nbsp;
         <a href="">各種表</a>&nbsp; -->
     </div>
     <div id="main">
     {% for category, message in get_flashed_messages(with_categories=true) %}
         {% if category == 'success' %}
-            <div style="background-color: #98fb98;">
+            <div id="succes_msg">
                 {{ message }}
             </div>
         {% elif category == "error" %}
-            <div style="background-color: #ffc0cb;">
+            <div id="error_msg">
                 {{ message }}
             </div>
         {% endif %}
     {% endfor %}
-    <h2>{% block title %}{% endblock %}</h2>
     {% block body %}{% endblock %}
     </div>
 </body>

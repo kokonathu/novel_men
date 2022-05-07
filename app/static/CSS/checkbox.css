@@ -1,0 +1,52 @@
+/* checkbox */
+
+.my-checkbox {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding-left: 28px;
+    cursor: pointer;
+    user-select: none; /* テキストの選択を防ぐ */
+  }
+
+  /* inputは非表示にする */
+  .my-checkbox input {
+    display: none;
+  }
+
+  /* □ */
+  .checkmark {
+    position: absolute;
+    top: 0; /* 上からの位置 */
+    left: 0;
+    height: 22px; /* 大きさ */
+    width: 22px; /* 大きさ */
+    border: solid 2px #E5DCD0; /* 線 */
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  /* ✓ */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    left: 5px; /* チェックの位置 */
+    top: 1px; /* チェックの位置 */
+    width: 6px; /* チェックの大きさ */
+    height: 10px; /* チェックの大きさ */
+    border: solid #FFF;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0; /* 透明にしておく */
+  }
+
+  /* チェックが入ったときの□ */
+  .my-checkbox input:checked + .checkmark {
+    background: #7E6A4B; /* チェック時の色 */
+    border-color: #7E6A4B; /* チェック時の色 */
+  }
+
+  /* チェックが入ったときの✓ */
+  .my-checkbox input:checked + .checkmark:after {
+    opacity: 1; /* 透明を解除 */
+  }
+

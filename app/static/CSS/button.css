@@ -1,0 +1,59 @@
+/* button */
+
+#attachment label {
+  /* ボタン部分の見た目（任意） */
+  display: inline-block;
+  position: relative;
+  background: #7E6A4B;
+  color:#fff;
+  font-size: 16px;
+  padding: 10px 40px;
+  border-radius: 88px;
+  transition: all 0.3s;
+  margin: 1em;
+}
+#attachment label:hover {
+  background: #CBB89C;
+  transition: all 0.4s;
+}
+#attachment label input {
+  position: absolute;
+  left:0;
+  top:0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+#attachment .filename {
+  font-weight: 16px;
+  margin:0 0 0 10px;
+  font-size: 0.8em;
+}
+
+.button_style label {
+  /* ボタン部分の見た目（任意） */
+  display: inline-block;
+  position: relative;
+  background: #fff;
+  color:#7E6A4B;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 40px;
+  border-radius: 88px;
+  transition: all 0.3s;
+  margin: 1em;
+  border:  2px solid #7E6A4B;
+}
+.button_style label:hover {
+  background: #7E6A4B;
+  color:#E5DCD0;
+  transition: all 0.4s;
+}
+.button_style label input {
+  position: absolute;
+  left:0;
+  top:0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
