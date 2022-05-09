@@ -1,6 +1,6 @@
 /* button */
 
-#attachment label {
+#attachment1 label, #attachment2 label {
   /* ボタン部分の見た目（任意） */
   display: inline-block;
   position: relative;
@@ -12,11 +12,11 @@
   transition: all 0.3s;
   margin: 1em;
 }
-#attachment label:hover {
+#attachment1 label:hover, #attachment2 label:hover {
   background: #CBB89C;
   transition: all 0.4s;
 }
-#attachment label input {
+#attachment1 label input, #attachment2 label input {
   position: absolute;
   left:0;
   top:0;
@@ -24,7 +24,7 @@
   width: 100%;
   height: 100%;
 }
-#attachment .filename {
+#attachment1 .filename, #attachment2 .filename {
   font-weight: 16px;
   margin:0 0 0 10px;
   font-size: 0.8em;

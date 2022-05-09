@@ -17,7 +17,7 @@
 <div id="container" >
     <form name="form_hoge" action="{{url_for('main')}}" method="POST" enctype="multipart/form-data">
         <div>
-            <div id="attachment">
+            <div id="attachment1">
                 <label><input type="file" name="file_data" class="fileinput">PDFファイル選択</label>
                 <br>
                 <span class="filename">選択されていません</span>
@@ -57,7 +57,7 @@
             </label>
         </div>
         <div id="hide_zone" style="display: none;">
-            <div id="attachment">
+            <div id="attachment2">
                 <label><input type="file" name="template_img" class="fileinput">テンプレート選択</label>
                 <br>
                 <span class="filename">選択されていません</span>
@@ -107,9 +107,13 @@
         target_msg.style.display = "block";
     }, false);
 
-    $('#attachment .fileinput').on('change', function () {
+    $('#attachment1 .fileinput').on('change', function () {
         var file = $(this).prop('files')[0];
-        $(this).closest('#attachment').find('.filename').text(file.name);
+        $(this).closest('#attachment1').find('.filename').text(file.name);
+        });
+    $('#attachment2 .fileinput').on('change', function () {
+        var file = $(this).prop('files')[0];
+        $(this).closest('#attachment2').find('.filename').text(file.name);
         });
 
 
